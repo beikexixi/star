@@ -232,27 +232,27 @@ export default {
       vkhttp.xhr.get(`${ENV.gw}/cc-crm/api/activityCalendar/list`, {
         params: params
       })
-      .then((res) => {
-        this.activityLoading = false
-        if (!res.code) {
-          this.activityList = res.data.list
-          this.activityTotal = res.data.total
-          // 将活动类型的字母转成汉字 涉及到字符串数组之间的转化 'LX,KX' => '拉新，课消'
-          this.activityList.forEach(act => {
-            act.activityType = act.activityType.split(',').map(type => {
-              return this.typeObj[type]
+        .then((res) => {
+          this.activityLoading = false
+          if (!res.code) {
+            this.activityList = res.data.list
+            this.activityTotal = res.data.total
+            // 将活动类型的字母转成汉字 涉及到字符串数组之间的转化 'LX,KX' => '拉新，课消'
+            this.activityList.forEach(act => {
+              act.activityType = act.activityType.split(',').map(type => {
+                return this.typeObj[type]
+              })
             })
-          })
-        } else {
-          this.$message.error(res.message)
-        }
-      })
-      .catch((err) => {
-        this.activityLoading = false
-        this.$message.error(err.toString())
-        console.warn(err)
-      })
-    }
+          } else {
+            this.$message.error(res.message)
+          }
+        })
+        .catch((err) => {
+          this.activityLoading = false
+          this.$message.error(err.toString())
+          console.warn(err)
+        })
+    },
     // 埋点信息
     saClickLog (name, clickId) {
       sa.track('page_click', {
