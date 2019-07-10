@@ -1,70 +1,77 @@
 <template>
-  <div class="hello">
-    <p>我是master分支</p>
-    <h1>冲突了吧</h1>
-    <h1>哎哟喂</h1>
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <el-radio-group v-model="radio3">
-      <el-radio-button label="0"><i class="el-icon-star-on" style="font-size: 18px;">差</i></el-radio-button>
-      <el-radio-button label="1"><i class="el-icon-star-on" style="font-size: 18px;">中</i></el-radio-button>
-      <el-radio-button label="2"><i class="el-icon-star-on" style="font-size: 18px;">好</i></el-radio-button>
-    </el-radio-group>
-    <p>天下之大，无奇不有</p>
-    <h1>世间万物，必有始终</h1>
-  </div>
+  <div class="hello"></div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   data () {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-      value3: null,
-      texts: ['差', '较差', '一般', '满意', '非常满意'],
-      radio3: '0'
-    }
+    return {}
+  },
+  mounted () {
+    //-- 冒泡排序
+    // let result = this.bubbleSort([2, 6, 13, 4, 88, 5, 100, 1])
+    // console.log(result)
+    //-- 选择排序
+    // let result = this.selectionSort([2, 6, 13, 4, 88, 5, 100, 1])
+    // console.log(result)
+    //-- 插入排序
+    let result = this.insertionSort([2, 6, 13, 4, 88, 5, 100, 1])
+    console.log(result)
   },
   methods: {
-    handleChange (score) {
-      debugger
+    insertionSort (arr) { // 插入排序
+      let len = arr.length
+      let insertIndex = 1
+      for (let i = 0; i < len; i++) {
+        for (let j = 0; j < insertIndex; j++) {
+          if (arr[j] > arr[insertIndex]) {
+            let insertNum = arr[insertIndex]
+            arr.splice(insertIndex, 1)
+            arr.splice(j, 0, insertNum)
+            break
+          }
+        }
+        if (insertIndex <= len) {
+          insertIndex++
+        }
+        console.log(arr)
+      }
+    },
+    selectionSort (arr) { // 选择排序
+      let len = arr.length
+      let newArr = []
+      for (let i = 0; i < len; i++) {
+        let minIndex = 0
+        for (let j = 1; j < len - i; j++) {
+          if (arr[j] < arr[minIndex]) {
+            minIndex = j
+          }
+        }
+        newArr.push(arr[minIndex])
+        arr.splice(minIndex, 1)
+        console.log(arr, newArr)
+      }
+      return arr
+    },
+    bubbleSort (arr) { // 冒泡排序
+      let len = arr.length
+      for (let i = 0; i < len; i++) {
+        for (let j = 0; j < len - 1 - i; j++) {
+          if (arr[j] > arr[j + 1]) {
+            let tmp = arr[j]
+            arr[j] = arr[j + 1]
+            arr[j + 1] = tmp
+          }
+        }
+        console.log(arr)
+      }
+      return arr
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-.el-radio-button__inner {
-  border: none!important;
-  padding: 10px;
-}
-.el-radio-button__inner:hover {
-    color: #F7BA2A;
-}
-.el-radio-button__orig-radio:checked+.el-radio-button__inner {
-    color: #F7BA2A;
-    background-color: #fff;
-    border-color: #fff;
-    -webkit-box-shadow: none!important;
-    box-shadow: none!important;
-}
-</style>
-
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
