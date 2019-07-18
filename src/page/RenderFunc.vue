@@ -2,13 +2,13 @@
   <div>
     <el-button @click="handleAddDiv">新增一个div</el-button>
     <div id="wrapper">
-      <anchored-heading>aiya</anchored-heading>
+      <anchored-heading :level="2">Hello World</anchored-heading>
+      <my-el-table></my-el-table>
     </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
 export default {
   name: 'RenderFunc',
   data () {
@@ -19,11 +19,20 @@ export default {
   components: {
     'anchored-heading': {
       render: function (createElement) {
-          return createElement(
-            'h1',
-            this.$slots.default
-          )
+        return createElement(
+          'h' + this.level,
+          this.$slots.default
+        )
+      },
+      props: {
+        level: {
+          type: Number,
+          required: true
         }
+      }
+    },
+    'my-el-table': {
+      template: '<table v-if="true" border><tr><th>我是第一列</th></tr></table>'
     }
   },
   methods: {
@@ -35,5 +44,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
