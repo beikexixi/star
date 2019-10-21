@@ -11,7 +11,11 @@ Vue.use(Vuex)
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
-
+router.beforeEach((to, from, next) => {
+  /* 必须调用 `next` */
+  console.log(to.path, from.path, '====')
+  next()
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
